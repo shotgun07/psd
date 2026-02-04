@@ -12,6 +12,7 @@ jobs:
   build:
     name: Build Android App Bundle
     runs-on: ubuntu-latest
+    environment: psd
 
     steps:
       - name: Checkout
