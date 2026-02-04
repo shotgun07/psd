@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "887385523054",
+    "project_id": "oblns-f0561",
+    "storage_bucket": "oblns-f0561.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887385523054:android:ca81d1602dec552af9f77f",
+        "android_client_info": {
+          "package_name": "com.oblns.oblns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887385523054-qkvqvi29nm60vc7pg9sj881scnnlms4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf_RQ1oErPxcGPTXFcOEw8U9pLaqlzuVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887385523054-qkvqvi29nm60vc7pg9sj881scnnlms4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

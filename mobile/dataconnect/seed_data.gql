@@ -1,0 +1,65 @@
+mutation PopulateDatabaseWithSeedData @transaction @auth(level: USER, insecureReason: "This operation is used to populate the database with seed data.") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-04-26T12:00:00Z",
+      email: "demouser1@example.com",
+      firstName: "Demo",
+      lastName: "User1",
+      passwordHash: "hashed_password_1",
+      phoneNumber: "123-456-7890",
+      profilePictureUrl: "http://example.com/avatar1.jpg",
+      role: "rider",
+      username: "demouser1"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      createdAt: "2024-04-26T13:00:00Z",
+      email: "demouser2@example.com",
+      firstName: "Demo",
+      lastName: "User2",
+      passwordHash: "hashed_password_2",
+      phoneNumber: "987-654-3210",
+      profilePictureUrl: "http://example.com/avatar2.jpg",
+      role: "driver",
+      username: "demouser2"
+    }
+  ])
+  driverProfile_insertMany(data: [
+    {
+      id: "660e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      availabilityStatus: "available",
+      insuranceDetails: "insurance details",
+      isApproved: true,
+      licenseNumber: "license number",
+      vehicleColor: "vehicle color",
+      vehicleMake: "vehicle make",
+      vehicleModel: "vehicle model",
+      vehiclePlateNumber: "vehicle plate number",
+      vehicleYear: 2024
+    }
+  ])
+  ride_insertMany(data: [
+    {
+      id: "770e8400-e29b-41d4-a716-446655440000",
+      riderId: "550e8400-e29b-41d4-a716-446655440000",
+      dropoffLocationLat: 37.7749,
+      dropoffLocationLng: -122.4194,
+      pickupLocationLat: 34.0522,
+      pickupLocationLng: -118.2437,
+      requestedAt: "2024-04-27T14:00:00Z",
+      status: "completed"
+    }
+  ])
+  review_insertMany(data: [
+    {
+      id: "880e8400-e29b-41d4-a716-446655440000",
+      reviewedUserId: "550e8400-e29b-41d4-a716-446655440000",
+      reviewerId: "550e8400-e29b-41d4-a716-446655440001",
+      rideId: "770e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-04-27T15:00:00Z",
+      rating: 5
+    }
+  ])
+}

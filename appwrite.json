@@ -1,0 +1,375 @@
+{
+    "projectId": "697278c2003aaabdb975",
+    "projectName": "OBLNS",
+    "settings": {
+        "services": {
+            "databases": true,
+            "functions": true,
+            "storage": true,
+            "auth": true
+        }
+    },
+    "databases": [
+        {
+            "$id": "main_db",
+            "name": "Main Database",
+            "enabled": true,
+            "collections": [
+                {
+                    "$id": "trips",
+                    "name": "Trips",
+                    "enabled": true,
+                    "attributes": [
+                        {
+                            "key": "rider_id",
+                            "type": "string",
+                            "size": 255,
+                            "required": true
+                        },
+                        {
+                            "key": "driver_id",
+                            "type": "string",
+                            "size": 255,
+                            "required": false
+                        },
+                        {
+                            "key": "status",
+                            "type": "string",
+                            "size": 20,
+                            "required": true,
+                            "default": "searching"
+                        },
+                        {
+                            "key": "origin_lat",
+                            "type": "double",
+                            "required": true
+                        },
+                        {
+                            "key": "origin_lng",
+                            "type": "double",
+                            "required": true
+                        },
+                        {
+                            "key": "dest_lat",
+                            "type": "double",
+                            "required": true
+                        },
+                        {
+                            "key": "dest_lng",
+                            "type": "double",
+                            "required": true
+                        },
+                        {
+                            "key": "fare",
+                            "type": "double",
+                            "required": false
+                        },
+                        {
+                            "key": "geohash",
+                            "type": "string",
+                            "size": 20,
+                            "required": false
+                        }
+                    ],
+                    "indexes": [
+                        {
+                            "key": "idx_rider",
+                            "type": "key",
+                            "attributes": [
+                                "rider_id"
+                            ]
+                        },
+                        {
+                            "key": "idx_driver",
+                            "type": "key",
+                            "attributes": [
+                                "driver_id"
+                            ]
+                        },
+                        {
+                            "key": "idx_status",
+                            "type": "key",
+                            "attributes": [
+                                "status"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$id": "drivers",
+                    "name": "Drivers",
+                    "enabled": true,
+                    "attributes": [
+                        {
+                            "key": "user_id",
+                            "type": "string",
+                            "size": 255,
+                            "required": true
+                        },
+                        {
+                            "key": "is_online",
+                            "type": "boolean",
+                            "required": true,
+                            "default": false
+                        },
+                        {
+                            "key": "current_lat",
+                            "type": "double",
+                            "required": false
+                        },
+                        {
+                            "key": "current_lng",
+                            "type": "double",
+                            "required": false
+                        },
+                        {
+                            "key": "rating",
+                            "type": "double",
+                            "required": false,
+                            "default": 5.0
+                        },
+                        {
+                            "key": "vehicle_details",
+                            "type": "string",
+                            "size": 500,
+                            "required": false
+                        },
+                        {
+                            "key": "verification_status",
+                            "type": "string",
+                            "size": 20,
+                            "required": true,
+                            "default": "pending"
+                        }
+                    ],
+                    "indexes": [
+                        {
+                            "key": "idx_user",
+                            "type": "key",
+                            "attributes": [
+                                "user_id"
+                            ]
+                        },
+                        {
+                            "key": "idx_online",
+                            "type": "key",
+                            "attributes": [
+                                "is_online"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$id": "users",
+                    "name": "Users",
+                    "enabled": true,
+                    "attributes": [
+                        {
+                            "key": "name",
+                            "type": "string",
+                            "size": 255,
+                            "required": true
+                        },
+                        {
+                            "key": "phone",
+                            "type": "string",
+                            "size": 20,
+                            "required": true
+                        },
+                        {
+                            "key": "wallet_balance",
+                            "type": "double",
+                            "required": true,
+                            "default": 0.0
+                        },
+                        {
+                            "key": "rating",
+                            "type": "double",
+                            "required": false,
+                            "default": 5.0
+                        },
+                        {
+                            "key": "role",
+                            "type": "string",
+                            "size": 20,
+                            "required": true,
+                            "default": "client"
+                        },
+                        {
+                            "key": "version",
+                            "type": "integer",
+                            "required": true,
+                            "default": 0
+                        }
+                    ],
+                    "indexes": []
+                },
+                {
+                    "$id": "locks",
+                    "name": "Locks",
+                    "enabled": true,
+                    "attributes": [
+                        {
+                            "key": "target_id",
+                            "type": "string",
+                            "size": 255,
+                            "required": true
+                        }
+                    ],
+                    "indexes": [
+                        {
+                            "key": "idx_target",
+                            "type": "unique",
+                            "attributes": [
+                                "target_id"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$id": "transactions",
+                    "name": "Transactions",
+                    "enabled": true,
+                    "attributes": [
+                        {
+                            "key": "user_id",
+                            "type": "string",
+                            "size": 255,
+                            "required": true
+                        },
+                        {
+                            "key": "amount",
+                            "type": "double",
+                            "required": true
+                        },
+                        {
+                            "key": "type",
+                            "type": "string",
+                            "size": 20,
+                            "required": true
+                        },
+                        {
+                            "key": "order_id",
+                            "type": "string",
+                            "size": 255,
+                            "required": false
+                        },
+                        {
+                            "key": "status",
+                            "type": "string",
+                            "size": 20,
+                            "required": true,
+                            "default": "completed"
+                        }
+                    ],
+                    "indexes": [
+                        {
+                            "key": "idx_user_tx",
+                            "type": "key",
+                            "attributes": [
+                                "user_id"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$id": "geohash_index",
+                    "name": "Geohash Index",
+                    "enabled": true,
+                    "attributes": [
+                        {
+                            "key": "driver_id",
+                            "type": "string",
+                            "size": 255,
+                            "required": true
+                        },
+                        {
+                            "key": "geohash",
+                            "type": "string",
+                            "size": 20,
+                            "required": true
+                        },
+                        {
+                            "key": "updated_at",
+                            "type": "datetime",
+                            "required": true
+                        }
+                    ],
+                    "indexes": [
+                        {
+                            "key": "idx_geohash",
+                            "type": "key",
+                            "attributes": [
+                                "geohash"
+                            ]
+                        },
+                        {
+                            "key": "idx_updated",
+                            "type": "key",
+                            "attributes": [
+                                "updated_at"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "functions": [
+        {
+            "$id": "dispatchEngine",
+            "name": "Dispatch Engine",
+            "runtime": "node-18.0",
+            "path": "backend/functions/dispatchEngine",
+            "entrypoint": "src/main.js",
+            "execute": [
+                "users"
+            ],
+            "events": [
+                "databases.main_db.collections.trips.documents.create"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true
+        },
+        {
+            "$id": "mapsProxy",
+            "name": "Maps Proxy",
+            "runtime": "node-18.0",
+            "path": "backend/functions/mapsProxy",
+            "entrypoint": "src/main.js",
+            "execute": [
+                "users"
+            ],
+            "enabled": true,
+            "logging": true
+        },
+        {
+            "$id": "dailyRecon",
+            "name": "Daily Reconciliation",
+            "runtime": "node-18.0",
+            "path": "backend/functions/dailyRecon",
+            "entrypoint": "src/main.js",
+            "execute": [],
+            "schedule": "0 0 * * *",
+            "enabled": true,
+            "logging": true
+        },
+        {
+            "$id": "aiChatbot",
+            "name": "AI Chatbot",
+            "runtime": "node-18.0",
+            "path": "backend/functions/aiChatbot",
+            "entrypoint": "src/main.js",
+            "execute": [
+                "users"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true
+        }
+    ]
+}

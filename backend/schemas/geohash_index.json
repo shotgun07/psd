@@ -1,0 +1,83 @@
+{
+    "name": "geohash_index",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"users\")"
+    ],
+    "attributes": [
+        {
+            "key": "entity_type",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "driver",
+                "merchant"
+            ]
+        },
+        {
+            "key": "entity_id",
+            "type": "string",
+            "size": 255,
+            "required": true
+        },
+        {
+            "key": "geohash",
+            "type": "string",
+            "size": 12,
+            "required": true
+        },
+        {
+            "key": "lat",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "lng",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "precision",
+            "type": "integer",
+            "required": true
+        },
+        {
+            "key": "last_updated",
+            "type": "datetime",
+            "required": true,
+            "description": "Timestamp for real-time tracking"
+        },
+        {
+            "key": "status",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "online",
+                "offline",
+                "busy"
+            ],
+            "description": "Driver status for real-time updates"
+        }
+    ],
+    "indexes": [
+        {
+            "key": "idx_geohash",
+            "type": "key",
+            "attributes": [
+                "geohash"
+            ]
+        },
+        {
+            "key": "idx_entity",
+            "type": "unique",
+            "attributes": [
+                "entity_type",
+                "entity_id"
+            ]
+        }
+    ]
+}

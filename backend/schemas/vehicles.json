@@ -1,0 +1,74 @@
+{
+    "name": "vehicles",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"users\")"
+    ],
+    "attributes": [
+        {
+            "key": "driver_id",
+            "type": "string",
+            "size": 255,
+            "required": true
+        },
+        {
+            "key": "type",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "bike",
+                "car",
+                "van",
+                "truck"
+            ]
+        },
+        {
+            "key": "plate_number",
+            "type": "string",
+            "size": 20,
+            "required": true
+        },
+        {
+            "key": "model",
+            "type": "string",
+            "size": 100,
+            "required": false
+        },
+        {
+            "key": "color",
+            "type": "string",
+            "size": 50,
+            "required": false
+        },
+        {
+            "key": "status",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "active",
+                "inactive",
+                "maintenance"
+            ]
+        }
+    ],
+    "indexes": [
+        {
+            "key": "idx_driver",
+            "type": "unique",
+            "attributes": [
+                "driver_id"
+            ]
+        },
+        {
+            "key": "idx_plate",
+            "type": "unique",
+            "attributes": [
+                "plate_number"
+            ]
+        }
+    ]
+}

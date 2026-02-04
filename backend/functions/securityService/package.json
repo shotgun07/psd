@@ -1,0 +1,6 @@
+{
+    "name": "security-service",
+    "dependencies": {
+        "@types/node": "^20.0.0"
+    }
+}

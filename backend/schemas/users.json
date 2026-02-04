@@ -1,0 +1,94 @@
+{
+    "name": "users",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"users\")"
+    ],
+    "attributes": [
+        {
+            "key": "name",
+            "type": "string",
+            "size": 255,
+            "required": true
+        },
+        {
+            "key": "phone",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "array": false
+        },
+        {
+            "key": "role",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "customer",
+                "driver",
+                "merchant",
+                "admin"
+            ]
+        },
+        {
+            "key": "status",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "active",
+                "blocked",
+                "pending_kyc"
+            ]
+        },
+        {
+            "key": "wallet_balance",
+            "type": "double",
+            "required": false,
+            "default": 0.0
+        },
+        {
+            "key": "rating",
+            "type": "double",
+            "required": false,
+            "default": 5.0
+        },
+        {
+            "key": "language",
+            "type": "string",
+            "size": 5,
+            "required": false,
+            "default": "ar"
+        },
+        {
+            "key": "profile_photo",
+            "type": "string",
+            "size": 255,
+            "required": false
+        },
+        {
+            "key": "meta",
+            "type": "string",
+            "size": 1000,
+            "required": false
+        }
+    ],
+    "indexes": [
+        {
+            "key": "idx_phone",
+            "type": "unique",
+            "attributes": [
+                "phone"
+            ]
+        },
+        {
+            "key": "idx_role",
+            "type": "key",
+            "attributes": [
+                "role"
+            ]
+        }
+    ]
+}

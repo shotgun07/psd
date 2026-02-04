@@ -1,0 +1,6 @@
+{
+    "name": "geohash-service",
+    "dependencies": {
+        "ngeohash": "^0.6.3"
+    }
+}

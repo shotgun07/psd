@@ -1,0 +1,88 @@
+{
+    "name": "transactions",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"users\")"
+    ],
+    "attributes": [
+        {
+            "key": "order_id",
+            "type": "string",
+            "size": 255,
+            "required": true
+        },
+        {
+            "key": "user_id",
+            "type": "string",
+            "size": 255,
+            "required": true
+        },
+        {
+            "key": "amount",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "currency",
+            "type": "string",
+            "size": 3,
+            "required": true,
+            "default": "LYD"
+        },
+        {
+            "key": "type",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "payment",
+                "refund",
+                "payout",
+                "top-up"
+            ]
+        },
+        {
+            "key": "status",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "pending",
+                "completed",
+                "failed",
+                "reversed"
+            ]
+        },
+        {
+            "key": "provider_response",
+            "type": "string",
+            "size": 2000,
+            "required": false
+        }
+    ],
+    "indexes": [
+        {
+            "key": "idx_order",
+            "type": "key",
+            "attributes": [
+                "order_id"
+            ]
+        },
+        {
+            "key": "idx_user",
+            "type": "key",
+            "attributes": [
+                "user_id"
+            ]
+        },
+        {
+            "key": "idx_status",
+            "type": "key",
+            "attributes": [
+                "status"
+            ]
+        }
+    ]
+}

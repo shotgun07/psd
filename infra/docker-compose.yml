@@ -1,0 +1,9 @@
+﻿version: '3'
+services:
+  appwrite:
+    image: appwrite/appwrite:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - _APP_ENV=development

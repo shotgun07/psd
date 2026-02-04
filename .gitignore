@@ -1,0 +1,37 @@
+# Flutter/Dart
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.packages
+**/.env
+**/.env.example
+
+# Android
+**/android/local.properties
+**/android/key.properties
+**/android/app/**.keystore
+**/android/app/**.jks
+**/android/app/google-services.json
+
+# iOS
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/App.framework
+**/ios/Flutter/App.podspec
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Node
+# Large Files
+*.bin
+*.zip
+*.rar

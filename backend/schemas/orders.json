@@ -1,0 +1,153 @@
+{
+    "name": "orders",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"users\")"
+    ],
+    "attributes": [
+        {
+            "key": "customer_id",
+            "type": "string",
+            "size": 255,
+            "required": true
+        },
+        {
+            "key": "driver_id",
+            "type": "string",
+            "size": 255,
+            "required": false
+        },
+        {
+            "key": "type",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "ride",
+                "food",
+                "parcel",
+                "truck"
+            ]
+        },
+        {
+            "key": "status",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "pending",
+                "searching",
+                "assigned",
+                "en_route",
+                "picked_up",
+                "delivered",
+                "cancelled",
+                "disputed"
+            ]
+        },
+        {
+            "key": "pickup_lat",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "pickup_lng",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "pickup_address",
+            "type": "string",
+            "size": 500,
+            "required": true
+        },
+        {
+            "key": "dropoff_lat",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "dropoff_lng",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "dropoff_address",
+            "type": "string",
+            "size": 500,
+            "required": true
+        },
+        {
+            "key": "distance_km",
+            "type": "double",
+            "required": false
+        },
+        {
+            "key": "estimated_duration_min",
+            "type": "integer",
+            "required": false
+        },
+        {
+            "key": "total_price",
+            "type": "double",
+            "required": true
+        },
+        {
+            "key": "payment_method",
+            "type": "string",
+            "size": 20,
+            "required": true,
+            "format": "enum",
+            "elements": [
+                "cash",
+                "wallet",
+                "card"
+            ]
+        },
+        {
+            "key": "metadata",
+            "type": "string",
+            "size": 2000,
+            "required": false
+        }
+    ],
+    "indexes": [
+        {
+            "key": "idx_status",
+            "type": "key",
+            "attributes": [
+                "status"
+            ]
+        },
+        {
+            "key": "idx_customer",
+            "type": "key",
+            "attributes": [
+                "customer_id"
+            ]
+        },
+        {
+            "key": "idx_driver",
+            "type": "key",
+            "attributes": [
+                "driver_id"
+            ]
+        },
+        {
+            "key": "stops",
+            "type": "string",
+            "size": 1000,
+            "required": false,
+            "description": "JSON array of stop locations for multi-stop deliveries"
+        },
+        {
+            "key": "idx_created_at",
+            "type": "key",
+            "attributes": [
+                "$createdAt"
+            ]
+        }
+    ]
+}

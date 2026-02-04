@@ -1,0 +1,39 @@
+# Optimized Appwrite Local Setup for oblns
+# Note: This is an illustrative docker-compose. For a full production-ready 
+# Appwrite installation, use: 
+# docker run -it --rm appwrite/install
+
+version: '3'
+
+services:
+  appwrite:
+    image: appwrite/appwrite:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - _APP_ENV=development
+      - _APP_OPENSOURCE=enabled
+      - _APP_DOMAIN=localhost
+      - _APP_REDIS_HOST=redis
+      - _APP_DB_HOST=mariadb
+    depends_on:
+      - mariadb
+      - redis
+
+  mariadb:
+    image: mariadb:10.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=appwrite
+    volumes:
+      - appwrite-mariadb:/var/lib/mysql
+
+  redis:
+    image: redis:6.0-alpine
+    volumes:
+      - appwrite-redis:/data
+
+volumes:
+  appwrite-mariadb:
+  appwrite-redis:

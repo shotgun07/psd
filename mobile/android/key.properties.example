@@ -1,0 +1,4 @@
+storePassword=myStorePassword
+keyPassword=myKeyPassword
+keyAlias=oblns
+storeFile=oblns-release-key.jks

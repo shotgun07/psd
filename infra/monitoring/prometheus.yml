@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "appwrite"
+    static_configs:
+      - targets: ["appwrite:80"]
+  - job_name: "mariadb"
+    static_configs:
+      - targets: ["mariadb:3306"]
+  - job_name: "redis"
+    static_configs:
+      - targets: ["redis:6379"]

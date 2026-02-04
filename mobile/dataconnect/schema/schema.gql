@@ -1,0 +1,50 @@
+type User @table {
+  username: String!
+  passwordHash: String!
+  role: String! # Assuming enum will be handled as String for now
+  createdAt: Timestamp!
+  email: String
+  phoneNumber: String
+  firstName: String
+  lastName: String
+  profilePictureUrl: String
+}
+
+type DriverProfile @table {
+  user: User!
+  licenseNumber: String!
+  vehicleMake: String!
+  vehicleModel: String!
+  vehicleYear: Int!
+  vehiclePlateNumber: String!
+  isApproved: Boolean!
+  availabilityStatus: String! # Assuming enum will be handled as String for now
+  vehicleColor: String
+  insuranceDetails: String
+}
+
+type Ride @table {
+  rider: User!
+  driver: User
+  pickupLocationLat: Float!
+  pickupLocationLng: Float!
+  dropoffLocationLat: Float!
+  dropoffLocationLng: Float!
+  requestedAt: Timestamp!
+  status: String! # Assuming enum will be handled as String for now
+  acceptedAt: Timestamp
+  startedAt: Timestamp
+  completedAt: Timestamp
+  fare: Float
+  eta: Int
+  distance: Float
+}
+
+type Review @table {
+  ride: Ride!
+  reviewer: User!
+  reviewedUser: User!
+  rating: Int!
+  createdAt: Timestamp!
+  comment: String
+}

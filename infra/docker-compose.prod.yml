@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  appwrite:
+    image: appwrite/appwrite:1.4.1
+    container_name: appwrite
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - APPWRITE_ENV=production
+      - APPWRITE_URL=https://localhost
+      - APPWRITE_DATABASE_SHARED_TABLES=false
+      - APPWRITE_REDIS_HOST=redis
+      - APPWRITE_DB_HOST=mariadb
+      - APPWRITE_DB_USER=root
+      - APPWRITE_DB_PASS=password
+      - APPWRITE_DB_SCHEMA=appwrite
+      - APPWRITE_OPENSSL_KEY_V1=your-openssl-key
+      - APPWRITE_JWT_SECRET=your-jwt-secret
+    volumes:
+      - appwrite-uploads:/storage/uploads:rw
+      - appwrite-cache:/storage/cache:rw
+      - appwrite-config:/storage/config:rw
+      - appwrite-certificates:/storage/certificates:rw
+      - appwrite-functions:/storage/functions:rw
+    depends_on:
+      - mariadb
+      - redis
+    networks:
+      - appwrite
+
+  mariadb:
+    image: mariadb:10.7
+    container_name: appwrite-mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=appwrite
+      - MYSQL_USER=appwrite
+      - MYSQL_PASSWORD=password
+    volumes:
+      - appwrite-mariadb:/var/lib/mysql:rw
+    networks:
+      - appwrite
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: appwrite-redis
+    restart: unless-stopped
+    volumes:
+      - appwrite-redis:/data:rw
+    networks:
+      - appwrite
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 20s
+      retries: 10
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - appwrite
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - appwrite
+
+volumes:
+  appwrite-uploads:
+  appwrite-cache:
+  appwrite-config:
+  appwrite-certificates:
+  appwrite-functions:
+  appwrite-mariadb:
+  appwrite-redis:
+  grafana-storage:
+
+networks:
+  appwrite:
+    driver: bridge
